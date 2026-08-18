@@ -26,10 +26,12 @@ export default function Index() {
           ),
         }}
       />
-      <Text style={styles.text}>Home Screen</Text>
-      <Link href="/about" style={styles.button}>
-        Go to About Screen
+
+      <Text style={styles.text}>List of Supplments</Text>
+      <Link href="/supplements" style={styles.button}>
+        Go to full list of Supplements & Details
       </Link>
+
     </View>
   );
 }
