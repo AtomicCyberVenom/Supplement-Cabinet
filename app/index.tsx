@@ -1,9 +1,23 @@
-import { Text, View, StyleSheet } from 'react-native';
-import { Link } from 'expo-router';
+import { Text, View, StyleSheet, Pressable } from 'react-native';
+import { Link, Stack } from 'expo-router';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 export default function Index() {
   return (
     <View style={styles.container}>
+        <Stack.Screen
+            options={{
+                title:'Cabinet',
+
+                headerRight:()=>(
+                    <Link href={"/search"} asChild>
+                        <Pressable hitSlop={12}>
+                            <Ionicons name="search" size={20} color="#0F766E"/>
+                        </Pressable>
+                    </Link>
+                ),
+            }}
+            />
       <Text style={styles.text}>Home Screen</Text>
       <Link href="/about" style={styles.button}>
         Go to About Screen
@@ -19,11 +33,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   text: {
-    color: '#fff',
+    color: '#000',
   },
   button: {
     fontSize: 20,
     textDecorationLine: 'underline',
-    color: '#fff',
+    color: '#000',
   },
 });
