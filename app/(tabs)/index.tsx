@@ -1,6 +1,7 @@
 import { Text, View, StyleSheet, Pressable, FlatList } from 'react-native';
 import { Link, Stack } from 'expo-router';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { useRouter } from 'expo-router';
 
 const SUPPLEMENTS = [
   { id: '1', name: 'Vitamin D3', dosage: '2000 IU', frequency: 'Daily' },
@@ -11,6 +12,7 @@ const SUPPLEMENTS = [
 ];
 
 export default function Index() {
+  const router = useRouter();
   return (
     <View style={styles.container}>
       <Stack.Screen
@@ -37,10 +39,10 @@ export default function Index() {
         keyExtractor={(item) => item.id}
         style={styles.list}
         renderItem={({ item }) => (
-          <View style={styles.row}>
+          <Pressable style={styles.row} onPress={() => router.push(`/supplement/${item.id}`)}>
             <Text style={styles.name}>{item.name}</Text>
             <Text style={styles.detail}>{item.dosage} · {item.frequency}</Text>
-          </View>
+          </Pressable>
         )}
         ListEmptyComponent={<Text style={styles.empty}>No supplements yet.</Text>}
       />
@@ -70,3 +72,5 @@ const styles = StyleSheet.create({
   detail: { fontSize: 13, color: '#6b7280', marginTop: 2 },
   empty: { textAlign: 'center', marginTop: 40, color: '#9ca3af' },
 });
+
+
