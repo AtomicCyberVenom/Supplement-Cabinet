@@ -12,6 +12,7 @@ const SUPPLEMENTS = [
 ];
 
 export default function Index() {
+  // top right button to add or search
   const router = useRouter();
   return (
     <View style={styles.container}>
@@ -34,14 +35,20 @@ export default function Index() {
           ),
         }}
       />
+      {/* list of supplements  */}
       <FlatList
         data={SUPPLEMENTS}
         keyExtractor={(item) => item.id}
         style={styles.list}
         renderItem={({ item }) => (
           <Pressable style={styles.row} onPress={() => router.push(`/supplement/${item.id}`)}>
-            <Text style={styles.name}>{item.name}</Text>
-            <Text style={styles.detail}>{item.dosage} · {item.frequency}</Text>
+            <View style={styles.rowContent}>
+              <View>
+                <Text style={styles.name}>{item.name}</Text>
+                <Text style={styles.detail}>{item.dosage} · {item.frequency}</Text>
+              </View>
+              <Ionicons name="chevron-forward" size={18} color="#9ca3af" />
+            </View>
           </Pressable>
         )}
         ListEmptyComponent={<Text style={styles.empty}>No supplements yet.</Text>}
@@ -63,11 +70,21 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   row: {
+    marginHorizontal: 16,
+    marginVertical: 6,
     paddingHorizontal: 16,
-    paddingVertical: 12,
-    borderBottomWidth: 1,
-    borderBottomColor: '#e5e7eb',
+    paddingVertical: 14,
+    backgroundColor: '#f9fafb',
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: '#e5e7eb',
   },
+  rowContent: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+
   name: { fontSize: 16, fontWeight: '600', color: '#000' },
   detail: { fontSize: 13, color: '#6b7280', marginTop: 2 },
   empty: { textAlign: 'center', marginTop: 40, color: '#9ca3af' },
